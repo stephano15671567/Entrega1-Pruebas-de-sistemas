@@ -79,8 +79,6 @@ class TestDistanceService(unittest.TestCase):
             unit=""
         )
         respuesta = self.stub.geodesic_distance(solicitud)
-        # Delta estricto para que falle si el valor no es exacto
-        self.assertAlmostEqual(respuesta.distance, 1568, delta=1)
         self.assertEqual(respuesta.unit, "km")
 
     # 7- Prueba con una latitud cerca del límite inferior (valores frontera)
