@@ -81,7 +81,7 @@ class TestDistanceService(unittest.TestCase):
         respuesta = self.stub.geodesic_distance(solicitud)
         self.assertEqual(respuesta.unit, "km")
 
-    # 7- Prueba con una latitud cerca del límite inferior (valores frontera)
+    # 7- Prueba con una latitud cerca del límite inferior (valores frontera)a
     def test_latitud_casi_minima(self):
         solicitud = SourceDest(
             source=Position(latitude=-89.999, longitude=0),
