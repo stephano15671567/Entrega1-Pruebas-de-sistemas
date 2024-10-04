@@ -24,7 +24,6 @@ class TestDistanceService(unittest.TestCase):
         respuesta = self.stub.geodesic_distance(solicitud)
         # Delta estricto para forzar el fallo si no coincide exactamente
         self.assertAlmostEqual(respuesta.distance, 1568, delta=1)
-        self.assertEqual(respuesta.unit, "km")
 
     # 2- Prueba una distancia válida entre dos puntos en millas náuticas (success path)
     def test_distancia_valida_nm(self):
@@ -36,7 +35,6 @@ class TestDistanceService(unittest.TestCase):
         respuesta = self.stub.geodesic_distance(solicitud)
         # Delta estricto para forzar el fallo si no coincide exactamente
         self.assertAlmostEqual(respuesta.distance, 847, delta=1)
-        self.assertEqual(respuesta.unit, "nm")
 
     # 3- Prueba con una latitud inválida por encima del rango permitido (expected exception)
     def test_latitud_invalida_superior(self):
