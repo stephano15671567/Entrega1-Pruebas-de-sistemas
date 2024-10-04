@@ -120,6 +120,28 @@ class TestDistanceService(unittest.TestCase):
         self.assertEqual(respuesta.distance, 0.0)
         self.assertEqual(respuesta.unit, "km")
 
+    # 11- Prueba para ver si se entrega un string random en la unidad se transformará en km o invalid retornando -1 en la distancia
+    def test_random_string_unit(self):
+        solicitud = SourceDest(
+            source=Position(latitude=-1, longitude=2),
+            destination=Position(latitude=3, longitude=-4),
+            unit="cualquiercosa" #Se comprueba que ocurrirá si se entrega un string random a los permitidos (km o nm)
+        )
+        respuesta = self.stub.geodesic_distance(solicitud)
+        self.assertEqual(respuesta.distance, -1)
+        self.assertEqual(respuesta.unit, "invalid")
+
+    # 12- Esta prueba busca comparar entre la distancia
+    def test_google_earth_comparaison(self):
+        solicitud = SourceDest(
+            source=Position(latitude=42, longitude=80),
+            destination=Position(latitude=45, longitude=90),
+            unit="km" #Se comprueba que ocurrirá si se entrega un string random a los permitidos (km o nm)
+        )
+        distancia_earth = 876
+        respuesta = self.stub.geodesic_distance(solicitud)
+        self.assertAlmostEqual(respuesta.distance, distancia_earth, delta=2)
+
 
 if __name__ == "__main__":
     unittest.main()
